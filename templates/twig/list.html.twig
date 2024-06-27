@@ -8,7 +8,7 @@
     <tr>
         
         <td>{{i.id}}</td>
-        <td>{{i.username}}</td>
+        <td>{{i.username|lower}}</td>
         <td>{{i.nb_books}}</td>
         
     </tr>
@@ -29,3 +29,4 @@
 {% endfor %}
 {{sum}}
 #}
+nb authors: {{a|length}}
