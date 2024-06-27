@@ -1,0 +1,31 @@
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>user</td>
+        <td>nb books</td>
+    </tr>
+    {%for i in a %}
+    <tr>
+        
+        <td>{{i.id}}</td>
+        <td>{{i.username}}</td>
+        <td>{{i.nb_books}}</td>
+        
+    </tr>
+    {% endfor %}
+</table>
+{#
+{%for i in a %}
+{{i.id}}
+{{i.username}}
+{{i.nb_books}}
+{% if i.nb_books>0%}
+<input type="submit" value="buy">
+{% endif %}
+{% endfor %}
+{% set sum=0%}
+{%for i in a %}
+{% set sum=sum+i.nb_books%}
+{% endfor %}
+{{sum}}
+#}
