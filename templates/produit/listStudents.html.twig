@@ -1,6 +1,22 @@
-{% for st in s%}
 
-{{st.id}}
-{{st.price}}
-{{st.quantity}}
+<table border="2">
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>price</td>
+        <td>quantity</td>
+        <td>Action</td>
+    </tr>
+
+    {% for st in s%}
+<tr>
+    <td>{{st.id}}</td>
+    <td>{{st.name}}</td>
+    <td>{{st.price}}</td>
+    <td>{{st.quantity}}</td>
+    <td><a href="{{path('u',{'id':st.id})}}"> update produit</a></td>
+
+</tr>
 {%endfor%}
+
+</table>
