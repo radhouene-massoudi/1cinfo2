@@ -1,7 +1,7 @@
 
 <table border="2">
     <tr>
-        <td>id</td>
+       
         <td>name</td>
         <td>price</td>
         <td>quantity</td>
@@ -11,7 +11,7 @@
 
     {% for st in s%}
 <tr>
-    <td>{{st.id}}</td>
+    
     <td>{{st.name}}</td>
     <td>{{st.price}}</td>
     <td>{{st.quantity}}</td>
@@ -19,7 +19,7 @@
     <td>{{st.cat}} si vous avez utliser la mehtode to string</td>
     #}
     
-    <td>{{st.cat.name}}</td>
+    <td>{{st.name}}</td>
     <td><a href="{{path('u',{'id':st.id})}}"> update produit</a>
         <a href="{{path('remove',{'id':st.id})}}"> remove</a>
         <a href="{{path('dtproduit',{'id':st.id})}}"> detail</a>

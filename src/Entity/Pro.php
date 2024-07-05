@@ -22,6 +22,9 @@ class Pro
     #[ORM\Column]
     private ?int $price = null;
 
+    #[ORM\ManyToOne(inversedBy: 'pros')]
+    private ?Category $cat = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Pro
     public function setPrice(int $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCat(): ?Category
+    {
+        return $this->cat;
+    }
+
+    public function setCat(?Category $cat): static
+    {
+        $this->cat = $cat;
 
         return $this;
     }

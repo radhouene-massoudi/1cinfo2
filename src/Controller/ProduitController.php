@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pro;
 use App\Form\AddproduitType;
 use App\Repository\ProRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -93,5 +94,54 @@ class ProduitController extends AbstractController
         return $this->render('produit/addproduit.html.twig',[
             'f'=>$formprouit->createView()
         ]);
+    }
+    #[Route('/remove/{id}', name: 'remove')]
+    public function removeProduct(ManagerRegistry $mr,ProRepository $repo, $id)
+    {
+        $p=$repo->find($id);
+        $em=$mr->getManager();
+        if($p!=null){
+            $em->remove($p);//delete from product where id=$id
+        $em->flush();
+        return $this->redirectToRoute('st'); 
+        }else{
+          return new Response('produit doesnt existe')  ;
+        }
+        
+    }
+    #[Route('/detailproduit/{id}', name: 'dtproduit')]
+    public function detailProduct(Pro $p)
+    {
+return $this->render('produit/detail.html.twig',[
+    'produit'=>$p
+]);
+    }
+
+    #[Route('/fetch', name: 'fecth')]
+    public function fetchAll(EntityManagerInterface $em, ProRepository $repo)
+    {
+        $produits=$repo->myFindAll();
+        /*
+$dql=$em->
+createQuery("select count(p) from App\Entity\Pro p join p.cat c where c.name='test' ");
+$produits=$dql->getSingleScalarResult();
+dd($produits);*/
+return $this->render('produit/dql.html.twig',[
+    's'=>$produits
+]);
+    }
+
+    #[Route('/search', name: 'search')]
+    public function search(ProRepository $repo)
+    {
+$search=$repo->nbProductByCat('test');
+dd($search);
+    }
+
+    #[Route('/qb', name: 'qb')]
+    public function qb(ProRepository $repo)
+    {
+        $req=$repo->MyFindAllTWo('yyyyy');
+        dd($req);
     }
 }
